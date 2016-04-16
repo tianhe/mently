@@ -7,7 +7,7 @@ task :rename_app_to, [:to_name] do |t, args|
   replace 'SampleApp', camelize_to_name, 'config/application.rb'
   replace 'sample_app', underscore_to_name, 'config/initializers/session_store.rb'
   replace 'sample_app', underscore_to_name, '.ruby-gemset'
-  replace 'sample_app', underscore_to_name, 'config/mongoid.yml'
+  replace 'sample_app', underscore_to_name, 'config/database.yml'
 end
 
 def replace from_string, to_string, file

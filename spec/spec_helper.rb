@@ -83,8 +83,8 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
   config.before(:suite) do
-    DatabaseCleaner[:mongoid].strategy = :truncation
-    DatabaseCleaner[:mongoid].clean_with(:truncation)
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)  
   end
 
   config.before(:each) do

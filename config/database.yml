@@ -1,0 +1,11 @@
+development: &development
+  adapter: postgresql
+  database: mently_development
+  min_messages: WARNING
+
+production:
+  <<: *development
+
+test: &TEST
+  <<: *development
+  database: mently_test

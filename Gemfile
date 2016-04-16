@@ -9,9 +9,7 @@ gem 'rolify'
 gem 'cancan'
 
 #mongo
-gem 'mongoid-tree'
-gem 'mongoid'
-gem 'bson_ext'
+gem 'pg'
 
 #front-end
 gem 'haml-rails'
@@ -48,7 +46,6 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'mongoid-rspec', '~> 2.0.0.rc1'
   gem 'factory_girl_rails'
   gem 'fuubar'
   gem 'faker'

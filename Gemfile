@@ -8,7 +8,10 @@ gem 'rails', '4.2.4'
 gem 'rolify'
 gem 'cancan'
 
-#mongo
+#admin
+gem 'activeadmin', '1.0.0.pre1'
+
+#database
 gem 'pg'
 
 #front-end

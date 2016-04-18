@@ -1,0 +1,107 @@
+.row
+  .col-xs-3
+  .col-xs-6
+    %h2="Profile"
+  .col-xs-3
+
+.row
+  .col-xs-3
+  .col-xs-6
+    %h3
+      ="User Info"
+  .col-xs-3
+
+.row
+  .col-xs-3
+  .col-xs-2
+    Email:
+  .col-xs-4
+    = @user.email
+
+.row
+  .col-xs-3
+  .col-xs-2
+    %span
+      = link_to "Edit Account", edit_user_registration_path
+
+.row
+  .col-xs-3
+  .col-xs-6
+    %h3="Role"
+  .col-xs-3
+
+.row
+  .col-xs-3
+  .col-xs-2
+    Mentor:
+  .col-xs-4
+    = @user.has_role?(:mentor)
+
+.row
+  .col-xs-3
+  .col-xs-2
+    Mentee:
+  .col-xs-4
+    = @user.has_role?(:mentee)
+
+.row
+  .col-xs-3
+  .col-xs-6
+    %h3="Profile"
+  .col-xs-3
+
+.row
+  .col-xs-3
+  .col-xs-2
+    First Name:
+  .col-xs-4
+    = @profile.first_name
+
+.row
+  .col-xs-3
+  .col-xs-2
+    Last Name:
+  .col-xs-4
+    = @profile.last_name
+
+.row
+  .col-xs-3
+  .col-xs-2
+    Gender:
+  .col-xs-4
+    = @profile.gender
+
+.row
+  .col-xs-3
+  .col-xs-2
+    Linkedin URL:
+  .col-xs-4
+    = link_to @profile.linkedin_url
+
+.row
+  .col-xs-3
+  .col-xs-2
+    Department:
+  .col-xs-4
+    = @profile.department
+
+.row
+  .col-xs-3
+  .col-xs-2
+    Experience:
+  .col-xs-4
+    = @profile.experience
+
+.row
+  .col-xs-3
+  .col-xs-2
+    Location:
+  .col-xs-4
+    = @profile.location
+
+
+.row
+  .col-xs-3
+  .col-xs-2
+    %span
+      = link_to "Edit Profile", edit_profile_path

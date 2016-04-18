@@ -1,0 +1,38 @@
+.row
+  .col-xs-3
+  .col-xs-6
+    %h4
+      = "Profile"
+    .form-container
+      = form_for @profile, url: { action: 'update' } do |f|
+        .form-group
+          = f.label :first_name
+          = f.text_field :first_name
+
+        .form-group
+          = f.label :last_name
+          = f.text_field :last_name
+
+        .form-group
+          = f.label :gender
+          = f.select :gender, ["male", "female"]
+
+        .form-group
+          = f.label :linkedin_url
+          = f.url_field :linkedin_url
+
+        .form-group
+          = f.label :department
+          = f.text_field :department
+
+        .form-group
+          = f.label :experience
+          = f.number_field :experience
+
+        .form-group
+          = f.label :location
+          = f.text_field :location
+
+        = f.submit
+  .col-xs-3
+

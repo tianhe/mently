@@ -7,14 +7,16 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:facebook]
 
-  ## Database authenticatable
-  # field :first_name,         type: String, default: ""
-  # field :last_name,          type: String, default: ""
-  # field :gender,             type: String, default: ""
-
   #field :authentication_token, type: String
   validates :email, :password, presence: true
-  
+  has_one :profile
+  after_create :create_profile
+
+private
+  def create_profile
+    self.build_profile.save
+  end
+
 #   has_many  :authentications
 #   accepts_nested_attributes_for :authentications
 

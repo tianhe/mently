@@ -4,19 +4,19 @@
     %h4
       = "Profile"
     .form-container
-      %form{id: "user", "accept-charset"=> "UTF-8", action: user_path(@current_user), method: "POST"}
+      %form{id: "user", "accept-charset"=> "UTF-8", action: profile_path, method: "POST"}
         %input{name: '_method', value: 'patch', type: 'hidden'}
         %input{name: 'authenticity_token', type: 'hidden', value: form_authenticity_token}
         .form-group
-          %input.form-control#first-name{ name: "user[first_name]", placeholder: "First name", value: @current_user.first_name } 
+          %input.form-control{ name: "user[first_name]", placeholder: "First name", value: @current_user.first_name } 
         .form-group
-          %input.form-control#last-name{ name: "user[last_name]", placeholder: "Last name", value: @current_user.last_name } 
+          %input.form-control{ name: "user[last_name]", placeholder: "Last name", value: @current_user.last_name } 
         .form-group
-          %input.form-control#email{ name: "user[email]", placeholder: "Email", value: @current_user.email } 
+          %input.form-control{ name: "user[email]", placeholder: "Email", value: @current_user.email } 
         .form-group
-          %input.form-control#email{ name: "user[password]", placeholder: "Password" } 
+          %input.form-control{ name: "user[password]", placeholder: "Password" } 
         .form-group
-          %input.form-control#email{ name: "user[password_confirmation]", placeholder: "Password Confirmation" } 
+          %input.form-control{ name: "user[password_confirmation]", placeholder: "Password Confirmation" } 
 
         
         %input.btn.btn-success.form-control#submit{ type: 'submit', value: 'Update'}

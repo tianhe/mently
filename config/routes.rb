@@ -1,9 +1,10 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users
+  devise_for :users, controllers: {registrations: "web/users/registrations"}
   mount Sidekiq::Web => '/sidekiq'
 
   devise_scope :user do
@@ -16,8 +17,10 @@ Rails.application.routes.draw do
   end
 
   scope module: :web do
-    resources :users,           only: [:update]
-    get '/profile', to: 'users#edit', as: :profile
+    resources :users,           only: [:update, :show]
+    get   '/profile/edit',    to: 'profiles#edit', as: :edit_profile
+    get   '/profile',    to: 'profiles#show'
+    patch '/profile',   to: 'profiles#update'
     resources :home,            only: [:index]
   end
   # You can have the root of your site routed with "root"

@@ -6,7 +6,7 @@ gem 'rails', '4.2.4'
 
 #user
 gem 'rolify'
-gem 'cancan'
+gem 'pundit'
 
 #admin
 gem 'activeadmin', '1.0.0.pre1'
@@ -36,6 +36,9 @@ gem 'rack-timeout'
 
 #social
 gem 'devise'
+gem 'fb_graph'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development

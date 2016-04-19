@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419013231) do
+ActiveRecord::Schema.define(version: 20160419031549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 20160419013231) do
     t.string   "name"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer  "mentor_id"
+    t.integer  "mentee_id"
+    t.integer  "status"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -116,4 +126,5 @@ ActiveRecord::Schema.define(version: 20160419013231) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  add_foreign_key "matches", "users", column: "mentee_id"
 end

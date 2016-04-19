@@ -15,6 +15,12 @@ class User < ActiveRecord::Base
   after_create :create_profile
   after_create :create_preferences
 
+  has_many :mentee_matches, class_name: 'Match', foreign_key: 'mentor_id'
+  has_many :mentees, through: :mentee_matches
+
+  has_many :mentor_matches, class_name: 'Match', foreign_key: 'mentee_id'
+  has_many :mentors, through: :mentor_matches  
+
 private
   def create_profile
     self.build_profile.save

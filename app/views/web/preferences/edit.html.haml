@@ -1,0 +1,16 @@
+.row
+  .col-xs-3
+  .col-xs-6
+    %h4
+      = "#{@preference.role.capitalize} Preference"
+    .form-container
+      = form_for @preference do |f|
+        .form-group
+          = f.label :description
+          = f.text_field :description
+        .form-group
+          = f.label :capacity
+          = f.number_field :capacity
+        = f.submit
+  .col-xs-3
+

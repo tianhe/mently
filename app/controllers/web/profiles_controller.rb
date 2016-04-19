@@ -1,4 +1,5 @@
 class Web::ProfilesController < Web::ApplicationController
+  before_action :authenticate_user!
   def show
     @profile = current_user.profile
     @user = current_user
@@ -11,7 +12,7 @@ class Web::ProfilesController < Web::ApplicationController
   def update
     @profile = current_user.profile
     @profile.update profile_params
-    redirect_to edit_profile_path
+    redirect_to profile_path
   end
 
 private

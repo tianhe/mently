@@ -5,16 +5,24 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => [:facebook]
+  # devise :omniauthable, :omniauth_providers => [:facebook]
 
   #field :authentication_token, type: String
   validates :email, :password, presence: true
   has_one :profile
+  has_many :preferences
+
   after_create :create_profile
+  after_create :create_preferences
 
 private
   def create_profile
     self.build_profile.save
+  end
+
+  def create_preferences
+    self.preferences.create(role: 'mentor', capacity: 1)
+    self.preferences.create(role: 'mentee', capacity: 2)
   end
 
 #   has_many  :authentications

@@ -1,0 +1,61 @@
+.row
+  .col-xs-3
+  .col-xs-6
+    %h2="Preferences"
+  .col-xs-3
+
+
+.row
+  .col-xs-3
+  .col-xs-6
+    %h3
+      ="Mentor Preferences"
+  .col-xs-3
+
+.row
+  .col-xs-3
+  .col-xs-2
+    Details
+  .col-xs-4    
+    = @mentor_preference.try(:description)
+
+.row
+  .col-xs-3
+  .col-xs-2
+    ="Maximum number of mentors"
+  .col-xs-4
+    = @mentor_preference.try(:capacity)
+
+.row
+  .col-xs-3
+  .col-xs-2
+    %span
+      = link_to "Edit", edit_preference_path(@mentor_preference) if @mentor_preference
+
+
+.row
+  .col-xs-3
+  .col-xs-6
+    %h3
+      ="Mentee Preferences"
+  .col-xs-3
+
+.row
+  .col-xs-3
+  .col-xs-2
+    Details
+  .col-xs-4    
+    = @mentee_preference.try(:description)
+
+.row
+  .col-xs-3
+  .col-xs-2
+    ="Maximum number of mentees"
+  .col-xs-4
+    = @mentee_preference.try(:capacity)
+
+.row
+  .col-xs-3
+  .col-xs-2
+    %span
+      = link_to "Edit", edit_preference_path(@mentee_preference)

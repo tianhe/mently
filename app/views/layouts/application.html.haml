@@ -14,12 +14,16 @@
         .navbar-collapse.visible-xs
           %ul.nav.navbar-nav.navbar-right
             %li
+              = link_to 'Preferences', '/preferences'
+            %li
               = link_to 'Profile', '/profile'
             %li
               = link_to 'Sign Out', '/sign_out'
 
         .navbar-collapse.hidden-xs
           %ul.nav.navbar-nav.navbar-right
+            %li
+              = link_to 'Preferences', '/preferences'
             %li
               = link_to 'Profile', '/profile'
             %li

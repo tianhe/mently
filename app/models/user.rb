@@ -10,10 +10,12 @@ class User < ActiveRecord::Base
   #field :authentication_token, type: String
   validates :email, :password, presence: true
   has_one :profile
-  has_many :preferences
+  has_one :mentor_profile
+  has_one :mentee_profile
 
-  after_create :create_profile
-  after_create :create_preferences
+  after_create :create_general_profile
+  after_create :create_mentor_profile
+  after_create :create_mentee_profile
 
   has_many :mentee_matches, class_name: 'Match', foreign_key: 'mentor_id'
   has_many :mentees, through: :mentee_matches
@@ -21,14 +23,20 @@ class User < ActiveRecord::Base
   has_many :mentor_matches, class_name: 'Match', foreign_key: 'mentee_id'
   has_many :mentors, through: :mentor_matches  
 
+  scope :available_as_mentor, -> availability { includes(:mentor_profile).where("mentor_profiles.is_available = ?", availability).references(:mentor_profile) }
+  scope :available_as_mentee, -> availability { includes(:mentee_profile).where("mentee_profiles.is_available = ?", availability).references(:mentee_profile) }
+
 private
-  def create_profile
+  def create_general_profile
     self.build_profile.save
   end
 
-  def create_preferences
-    self.preferences.create(role: 'mentor', capacity: 1)
-    self.preferences.create(role: 'mentee', capacity: 2)
+  def create_mentor_profile
+    self.build_mentor_profile(capacity: 1, is_available: false).save
+  end
+
+  def create_mentee_profile
+    self.build_mentee_profile(capacity: 1, is_available: false).save
   end
 
 #   has_many  :authentications

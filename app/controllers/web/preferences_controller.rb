@@ -3,8 +3,8 @@ class Web::PreferencesController < Web::ApplicationController
 
   def show
     @user = current_user
-    @mentor_preference = current_user.preferences.mentor.first
-    @mentee_preference = current_user.preferences.mentee.first
+    @mentor_preference = current_user.mentor_profile
+    @mentee_preference = current_user.mentee_profile
   end
 
   def edit

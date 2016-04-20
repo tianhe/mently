@@ -7,7 +7,7 @@ gem 'rails', '4.2.4'
 #user
 gem 'rolify'
 gem 'pundit'
-
+gem 'has_scope'
 #admin
 gem 'activeadmin', '1.0.0.pre1'
 

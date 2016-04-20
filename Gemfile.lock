@@ -391,6 +391,7 @@ DEPENDENCIES
   fb_graph
   fuubar
   haml-rails
+  has_scope
   jbuilder (~> 2.0)
   jquery-rails
   omniauth

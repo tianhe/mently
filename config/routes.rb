@@ -28,7 +28,8 @@ Rails.application.routes.draw do
     get   '/profile',    to: 'profiles#show', as: :profile
     patch '/profile',   to: 'profiles#update'
 
-    resources :preferences,     only: [:update, :edit]
+    resources :mentor_profiles,     only: [:update, :edit]
+    resources :mentee_profiles,     only: [:update, :edit]
     get   '/preferences', to: 'preferences#show', as: :preferences
 
 

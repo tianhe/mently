@@ -9,7 +9,7 @@
   .col-xs-3
   .col-xs-6
     %h3
-      ="Mentor Preferences"
+      ="Mentee Profile"
   .col-xs-3
 
 .row
@@ -17,27 +17,27 @@
   .col-xs-2
     Details
   .col-xs-4    
-    = @mentor_preference.try(:description)
+    = @mentee_profile.try(:mentor_criteria)
 
 .row
   .col-xs-3
   .col-xs-2
     ="Maximum number of mentors"
   .col-xs-4
-    = @mentor_preference.try(:capacity)
+    = @mentee_profile.try(:capacity)
 
 .row
   .col-xs-3
   .col-xs-2
     %span
-      = link_to "Edit", edit_preference_path(@mentor_preference) if @mentor_preference
+      = link_to "Edit", edit_mentee_profile_path(@mentee_profile) if @mentee_profile
 
 
 .row
   .col-xs-3
   .col-xs-6
     %h3
-      ="Mentee Preferences"
+      ="Mentor Profile"
   .col-xs-3
 
 .row
@@ -45,17 +45,17 @@
   .col-xs-2
     Details
   .col-xs-4    
-    = @mentee_preference.try(:description)
+    = @mentor_profile.try(:mentee_criteria)
 
 .row
   .col-xs-3
   .col-xs-2
     ="Maximum number of mentees"
   .col-xs-4
-    = @mentee_preference.try(:capacity)
+    = @mentor_profile.try(:capacity)
 
 .row
   .col-xs-3
   .col-xs-2
     %span
-      = link_to "Edit", edit_preference_path(@mentee_preference)
+      = link_to "Edit", edit_mentor_profile_path(@mentor_profile) if @mentor_profile

@@ -3,6 +3,14 @@
   .col-xs-10
     .row
       %h1 Mentees
+    .row
+      .col-xs-9
+      .col-xs-1
+        = link_to 'Unavailable', '/admin/mentees?available_as_mentee=false'
+      .col-xs-1
+        = link_to 'Available', '/admin/mentees?available_as_mentee=true'
+      .col-xs-1
+        = link_to 'All', '/admin/mentees'
 
     .row 
       %table.table-striped
@@ -33,5 +41,5 @@
             %td
               = m.mentors.count
             %td
-              = m.preferences.mentor.first.capacity
+              = m.mentee_profile.capacity
         

@@ -13,6 +13,6 @@ class Web::MenteeProfilesController < Web::ApplicationController
 
 private
   def mentee_profile_params
-    params.require(:mentee_profile).permit(:description, :capacity)
+    params.require(:mentee_profile).permit(:mentor_criteria, :capacity)
   end  
 end

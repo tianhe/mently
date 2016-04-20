@@ -23,8 +23,9 @@ class User < ActiveRecord::Base
   has_many :mentor_matches, class_name: 'Match', foreign_key: 'mentee_id'
   has_many :mentors, through: :mentor_matches  
 
-  scope :available_as_mentor, -> availability { includes(:mentor_profile).where("mentor_profiles.is_available = ?", availability).references(:mentor_profile) }
-  scope :available_as_mentee, -> availability { includes(:mentee_profile).where("mentee_profiles.is_available = ?", availability).references(:mentee_profile) }
+  scope :is_available_as_mentor, -> availability { includes(:mentor_profile).where("mentor_profiles.is_available = ?", availability).references(:mentor_profile) }
+  scope :is_available_as_mentee, -> availability { includes(:mentee_profile).where("mentee_profiles.is_available = ?", availability).references(:mentee_profile) }
+  scope :by_department, -> department { includes(:profile).where("profiles.department = ?", department).references(:profile) }
 
 private
   def create_general_profile

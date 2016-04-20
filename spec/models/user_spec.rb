@@ -21,13 +21,20 @@ RSpec.describe User, type: :model do
     user1 = create(:user)
     user2 = create(:user)
     user1.mentor_profile.update_attributes(is_available: true)
-    expect(User.available_as_mentor(true).to_a).to eq([user1])
+    expect(User.is_available_as_mentor(true).to_a).to eq([user1])
   end
 
   it 'should return users who are available as mentees' do
     user1 = create(:user)
     user2 = create(:user)
     user1.mentee_profile.update_attributes(is_available: true)
-    expect(User.available_as_mentee(true).to_a).to eq([user1])
+    expect(User.is_available_as_mentee(true).to_a).to eq([user1])
+  end
+
+  it 'should return users who are of a department' do
+    user1 = create(:user)
+    user2 = create(:user)
+    user2.profile.update_attributes(department: 'Tech')
+    expect(User.by_department('Tech').to_a).to eq([user2])
   end
 end

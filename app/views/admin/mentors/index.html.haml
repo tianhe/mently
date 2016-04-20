@@ -3,6 +3,15 @@
   .col-xs-10
     .row
       %h1 Mentors
+    .row
+      .col-xs-8
+      .col-xs-4
+        = form_tag '/admin/mentors', method: 'get' do
+          = label_tag :by_department
+          = select_tag :by_department, options_for_select(['Tech', 'Product'])
+          = label_tag :is_available_as_mentor
+          = select_tag :is_available_as_mentor, options_for_select(['true', 'false'])
+          = submit_tag("Filter")
 
     .row 
       %table.table-striped
@@ -33,5 +42,5 @@
             %td
               = m.mentees.count
             %td
-              = m.preferences.mentee.first.capacity
+              = m.mentee_profile.capacity
         

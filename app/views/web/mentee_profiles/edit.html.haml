@@ -2,12 +2,12 @@
   .col-xs-3
   .col-xs-6
     %h4
-      = "#{@preference.role.capitalize} Preference"
+      = "My Mentee Profile"
     .form-container
       = form_for @preference do |f|
         .form-group
-          = f.label :description
-          = f.text_field :description
+          = f.label :mentor_criteria
+          = f.text_field :mentor_criteria
         .form-group
           = f.label :capacity
           = f.number_field :capacity

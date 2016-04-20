@@ -1,0 +1,16 @@
+.row
+  .col-xs-3
+  .col-xs-6
+    %h4
+      = "My Mentor Profile"
+    .form-container
+      = form_for @preference do |f|
+        .form-group
+          = f.label :mentee_criteria
+          = f.text_field :mentee_criteria
+        .form-group
+          = f.label :capacity
+          = f.number_field :capacity
+        = f.submit
+  .col-xs-3
+

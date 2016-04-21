@@ -4,13 +4,14 @@
     .row
       %h1 Mentees
     .row
-      .col-xs-9
-      .col-xs-1
-        = link_to 'Unavailable', '/admin/mentees?available_as_mentee=false'
-      .col-xs-1
-        = link_to 'Available', '/admin/mentees?available_as_mentee=true'
-      .col-xs-1
-        = link_to 'All', '/admin/mentees'
+      .col-xs-7
+      .col-xs-5
+        = form_tag '/admin/mentees', method: 'get' do
+          = label_tag :by_department, "Department"
+          = select_tag :by_department, options_for_select(['', 'Tech', 'Product'], params[:by_department])
+          = label_tag :is_available_as_mentee, "Available"
+          = select_tag :is_available_as_mentee, options_for_select(['true', 'false'], params[:is_available_as_mentee])    
+          = submit_tag("Filter", class: 'filter-button')
 
     .row 
       %table.table-striped
@@ -41,5 +42,5 @@
             %td
               = m.mentors.count
             %td
-              = m.mentee_profile.capacity
+              = m.mentor_profile.capacity
         

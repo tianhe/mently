@@ -4,14 +4,14 @@
     .row
       %h1 Mentors
     .row
-      .col-xs-8
-      .col-xs-4
+      .col-xs-7
+      .col-xs-5
         = form_tag '/admin/mentors', method: 'get' do
-          = label_tag :by_department
-          = select_tag :by_department, options_for_select(['Tech', 'Product'])
-          = label_tag :is_available_as_mentor
-          = select_tag :is_available_as_mentor, options_for_select(['true', 'false'])
-          = submit_tag("Filter")
+          = label_tag :by_department, "Department"
+          = select_tag :by_department, options_for_select(['', 'Tech', 'Product'], params[:by_department])
+          = label_tag :is_available_as_mentor, "Available"
+          = select_tag :is_available_as_mentor, options_for_select(['true', 'false'], params[:is_available_as_mentor])    
+          = submit_tag("Filter", class: 'filter-button')
 
     .row 
       %table.table-striped

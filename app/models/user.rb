@@ -27,18 +27,42 @@ class User < ActiveRecord::Base
   scope :is_available_as_mentee, -> availability { includes(:mentee_profile).where("mentee_profiles.is_available = ?", availability).references(:mentee_profile) }
   scope :by_department, -> department { includes(:profile).where("profiles.department = ?", department).references(:profile) }
 
+  def update_availability
+    update_mentor_availability
+    update_mentee_availability
+  end
+
+  def is_available_as_mentee?
+    self.mentee_profile.is_available
+  end
+
+  def is_available_as_mentor?
+    self.mentor_profile.is_available
+  end
+
 private
+  def update_mentor_availability
+    is_available = self.mentees.count < (self.mentor_profile.capacity || 0)
+    self.mentor_profile.update_attributes(is_available: is_available)
+  end
+
+  def update_mentee_availability
+    is_available = self.mentors.count < (self.mentee_profile.capacity || 0)
+    self.mentee_profile.update_attributes(is_available: is_available)
+  end
+
   def create_general_profile
     self.build_profile.save
   end
 
   def create_mentor_profile
-    self.build_mentor_profile(capacity: 1, is_available: false).save
+    self.build_mentor_profile(is_available: false).save
   end
 
   def create_mentee_profile
-    self.build_mentee_profile(capacity: 1, is_available: false).save
+    self.build_mentee_profile(is_available: false).save
   end
+
 
 #   has_many  :authentications
 #   accepts_nested_attributes_for :authentications

@@ -1,0 +1,49 @@
+.row
+  .col-xs-1
+  .col-xs-10
+    .row
+      %h1 Matches
+
+.row
+  .col-xs-1
+  .col-xs-10
+    = link_to 'Assign Mentor Candidate', '/admin/users/3/matches/new'
+
+.row
+  .col-xs-1
+  .col-xs-10
+    .row
+      %h3
+        Active Mentors
+    .row
+      = render '/admin/mentors/mentors', mentors: @active_mentors
+
+    .row
+      %h3
+        Active Mentor Candidates
+    .row
+      = render '/admin/mentors/mentors', mentors: @mentor_candidates
+
+    .row
+      %h3
+        Active Mentees
+    .row
+      = render '/admin/mentees/mentees', mentees: @active_mentees
+            
+    .row
+      %h3
+        Active Mentee Candidates
+    .row
+      = render '/admin/mentees/mentees', mentees: @mentee_candidates
+
+    .row
+      %h3
+        Past Mentors
+    .row
+      = render '/admin/mentors/mentors', mentors: @past_mentors
+
+    .row
+      %h3
+        Past Mentor Candidates
+    .row
+      = render '/admin/mentors/mentors', mentors: @past_mentor_candidates

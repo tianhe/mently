@@ -7,13 +7,13 @@ RSpec.describe MentorProfile, type: :model do
     expect(mentor.mentor_profile.is_available).to eq(false)
   end
 
-  it 'should upate is_available to true if capacity is 1 and mentors is 0' do
+  it 'should upate is_available to true if no mentors and capacity is updated to 1' do
     mentor = create(:user)
     mentor.mentor_profile.update_attributes(capacity: 1)    
     expect(mentor.mentor_profile.is_available).to eq(true)
   end
 
-  it 'should update is_available to false if capacity is 1 and mentors is 1' do
+  it 'should update is_available to false if has a mentor and capacity is updated to 1' do
     mentor = create(:user)
     create(:match, mentor: mentor)
     mentor.mentor_profile.update_attributes(capacity: 1)

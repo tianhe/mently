@@ -27,6 +27,11 @@ class User < ActiveRecord::Base
   scope :is_available_as_mentee, -> availability { includes(:mentee_profile).where("mentee_profiles.is_available = ?", availability).references(:mentee_profile) }
   scope :by_department, -> department { includes(:profile).where("profiles.department = ?", department).references(:profile) }
 
+  scope :active, -> { where(matches: {status: Match.statuses[:active]}) }
+  scope :inactive, -> { where(matches: {status: Match.statuses[:inactive]}) }
+  scope :dating, -> { where(matches: {status: Match.statuses[:dating]}) }
+  scope :dated, -> { where(matches: {status: Match.statuses[:dated]}) }
+
   def update_availability
     update_mentor_availability
     update_mentee_availability
@@ -40,15 +45,25 @@ class User < ActiveRecord::Base
     self.mentor_profile.is_available
   end
 
+  def self.available_mentors_and_ids
+    Hash[User.is_available_as_mentor(true).map{ |u| [u.full_name, u.id] }]
+  end
+
+  def associated_users
+    mentees.map(&:full_name) + mentors.map(&:full_name) + [full_name]
+  end
+
+  def full_name
+    "#{profile.first_name} #{profile.last_name}"
+  end
+
 private
   def update_mentor_availability
-    is_available = self.mentees.count < (self.mentor_profile.capacity || 0)
-    self.mentor_profile.update_attributes(is_available: is_available)
+    self.mentor_profile.update_availability
   end
 
   def update_mentee_availability
-    is_available = self.mentors.count < (self.mentee_profile.capacity || 0)
-    self.mentee_profile.update_attributes(is_available: is_available)
+    self.mentee_profile.update_availability
   end
 
   def create_general_profile
@@ -56,11 +71,11 @@ private
   end
 
   def create_mentor_profile
-    self.build_mentor_profile(is_available: false).save
+    self.build_mentor_profile(capacity: 0).save
   end
 
   def create_mentee_profile
-    self.build_mentee_profile(is_available: false).save
+    self.build_mentee_profile(capacity: 0).save
   end
 
 

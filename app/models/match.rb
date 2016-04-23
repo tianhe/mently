@@ -4,6 +4,8 @@ class Match < ActiveRecord::Base
 
   after_save :update_availability
   
+  enum status: [:dating, :dated, :active, :inactive]
+
   def update_availability    
     self.mentor.update_availability 
     self.mentee.update_availability

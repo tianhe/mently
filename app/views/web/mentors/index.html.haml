@@ -1,0 +1,20 @@
+.row
+  .col-xs-1
+  .col-xs-10
+    .row
+      %h3
+        Active Mentors
+    .row    
+      = render '/web/mentors/mentors', mentors: @active_mentors
+
+    .row
+      %h3
+        Active Mentor Candidates
+    .row
+      = render '/web/mentors/mentors', mentors: @mentor_candidates
+    .row
+      .col-xs-10
+      .col-xs-2
+        = button_to 'Rank Candidates', '/mentors/rank'          
+          
+

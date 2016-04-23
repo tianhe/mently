@@ -12,7 +12,13 @@
         .navbar-header
           = link_to 'Mently', '/', id: 'logo'
         .navbar-collapse.visible-xs
-          %ul.nav.navbar-nav.navbar-right
+          %ul.nav.navbar-nav.navbar-right          
+            - if current_user && current_user.has_role?(:mentee)
+              %li
+                = link_to 'My Mentors', '/mentors'          
+            - if current_user && current_user.has_role?(:mentor)
+              %li
+                = link_to 'My Mentees', '/mentees'          
             %li
               = link_to 'Preferences', '/preferences'
             %li
@@ -22,6 +28,12 @@
 
         .navbar-collapse.hidden-xs
           %ul.nav.navbar-nav.navbar-right
+            - if current_user && current_user.has_role?(:mentee)
+              %li
+                = link_to 'My Mentors', '/mentors'          
+            - if current_user && current_user.has_role?(:mentor)
+              %li
+                = link_to 'My Mentees', '/mentees'          
             %li
               = link_to 'Preferences', '/preferences'
             %li

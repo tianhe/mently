@@ -1,0 +1,29 @@
+%table.table-striped
+  %tr
+    %th
+      First Name
+    %th
+      Last Name
+    %th
+      Department
+    %th
+      Location
+    %th
+      Available for Matching
+    %th
+      Assign Mentors
+
+  - mentees.each do |m|
+    %tr
+      %td
+        = m.profile.first_name
+      %td
+        = m.profile.last_name
+      %td
+        = m.profile.department
+      %td
+        = m.profile.location
+      %td
+        = m.mentee_profile.is_available
+      %td
+        = link_to 'Matches', "/admin/users/#{m.id}/matches"

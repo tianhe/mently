@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  it 'should return mentors and ids' do
+    user1 = create(:user)
+    user2 = create(:user)
+    user1.mentor_profile.update_attributes(capacity: 2)
+    user1.profile.update_attributes first_name: 'Clark', last_name: 'Kent'
+    user2.mentor_profile.update_attributes(capacity: 1)    
+    user2.profile.update_attributes first_name: 'Bruce', last_name: 'Wayne'
+
+    expect(User.available_mentors_and_ids).to eq({"Clark Kent" => user1.id, "Bruce Wayne" => user2.id})
+  end
+
   it 'should create a mentor profile by default' do
     user = create(:user)
     expect(user.mentor_profile).to_not be(nil)
@@ -20,14 +31,14 @@ RSpec.describe User, type: :model do
   it 'should return users who are available as mentors' do
     user1 = create(:user)
     user2 = create(:user)
-    user1.mentor_profile.update_attributes(is_available: true)
+    user1.mentor_profile.update_attributes(capacity: 2)
     expect(User.is_available_as_mentor(true).to_a).to eq([user1])
   end
 
   it 'should return users who are available as mentees' do
     user1 = create(:user)
     user2 = create(:user)
-    user1.mentee_profile.update_attributes(is_available: true)
+    user1.mentee_profile.update_attributes(capacity: 1)
     expect(User.is_available_as_mentee(true).to_a).to eq([user1])
   end
 
@@ -54,7 +65,7 @@ RSpec.describe User, type: :model do
       expect(mentee.is_available_as_mentee?).to eq(true)    
     end
 
-    it 'should return available is the capacity is 2 and mentors is 1' do
+    it 'should return available is the capacity is 2 and a new mentor is added' do
       mentee = create(:user)
       mentee.mentee_profile.update_attributes(capacity: 2)
       match = create(:match, mentee: mentee)
@@ -82,11 +93,11 @@ RSpec.describe User, type: :model do
     it 'should return available is the capacity is 1 and no mentors' do
       mentor = create(:user)
       mentor.mentor_profile.update_attributes(capacity: 1)
-      
+
       expect(mentor.is_available_as_mentor?).to eq(true)    
     end
 
-    it 'should return available is the capacity is 2 and mentors is 1' do
+    it 'should return available is the capacity is 2 and a new mentor is added' do
       mentor = create(:user)
       mentor.mentor_profile.update_attributes(capacity: 2)
       match = create(:match, mentor: mentor)

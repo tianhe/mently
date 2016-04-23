@@ -1,0 +1,37 @@
+%table.table-striped
+  %tr
+    %th
+      First Name
+    %th
+      Last Name
+    %th
+      Department
+    %th
+      Location
+    %th
+      Potential Mentee Count
+    %th
+      Active Mentee Count
+    %th
+      Capacity
+    %th
+      Available for Matching
+
+  - mentors.each do |m|
+    %tr
+      %td
+        = m.profile.first_name
+      %td
+        = m.profile.last_name
+      %td
+        = m.profile.department
+      %td
+        = m.profile.location
+      %td
+        = m.mentees.dating.count
+      %td
+        = m.mentees.active.count
+      %td
+        = m.mentor_profile.capacity
+      %td
+        = m.mentor_profile.is_available

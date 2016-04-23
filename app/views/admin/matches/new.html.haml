@@ -1,0 +1,19 @@
+.row
+  .col-xs-1
+  .col-xs-10
+    .row
+      %h1 New Match
+
+.row
+  .col-xs-1
+  .col-xs-10
+    .row
+      %h3
+        Select Mentor Candidate
+    .row
+      = form_tag "/admin/users/#{params[:user_id]}/matches" do
+        = label_tag :mentor, "Mentor"
+        = select_tag :mentor_id, options_for_select(@candidate_options)
+    
+        = submit_tag("Match", class: 'filter-button')
+

@@ -2,6 +2,34 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  namespace :web do
+  get 'mentees/index'
+  end
+
+  namespace :web do
+  get 'mentors/index'
+  end
+
+  namespace :web do
+  get 'mentors_controller/index'
+  end
+
+  namespace :admin do
+  get 'matches/create'
+  end
+
+  namespace :admin do
+  get 'matches/update'
+  end
+
+  namespace :admin do
+  get 'matches/edit'
+  end
+
+  namespace :admin do
+  get 'matches/index'
+  end
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -13,8 +41,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get '/mentors', to: 'mentors#index', as: :mentors
-    get '/mentees', to: 'mentees#index', as: :mentees
+    get  '/mentors', to: 'mentors#index', as: :mentors
+    get  '/mentees', to: 'mentees#index', as: :mentees
+    resources :users do
+      resources :matches, only: [:create, :update, :index, :edit, :new]
+    end
   end
 
   namespace :v1, defaults: { format: :json } do
@@ -23,7 +54,9 @@ Rails.application.routes.draw do
   end
 
   scope module: :web do
-    resources :users,           only: [:update, :show]
+    resources :mentors,       only: [:index]
+    resources :mentees,       only: [:index]
+    resources :users,         only: [:update, :show]
     get   '/profile/edit',    to: 'profiles#edit', as: :edit_profile
     get   '/profile',    to: 'profiles#show', as: :profile
     patch '/profile',   to: 'profiles#update'

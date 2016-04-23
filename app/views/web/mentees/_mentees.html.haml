@@ -1,0 +1,22 @@
+%table.table-striped
+  %tr
+    %th
+      First Name
+    %th
+      Last Name
+    %th
+      Department
+    %th
+      Location
+
+  - if mentees
+    - mentees.each do |m|
+      %tr
+        %td
+          = m.profile.first_name
+        %td
+          = m.profile.last_name
+        %td
+          = m.profile.department
+        %td
+          = m.profile.location

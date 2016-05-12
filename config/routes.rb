@@ -3,6 +3,10 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
 
   namespace :web do
+  get 'matches/update'
+  end
+
+  namespace :web do
   get 'mentees/index'
   end
 
@@ -56,6 +60,10 @@ Rails.application.routes.draw do
   scope module: :web do
     resources :mentors,       only: [:index]
     resources :mentees,       only: [:index]
+    patch '/matches/update_multiple', to: 'matches#update_multiple'
+    get '/mentees/rank',      to: 'mentees#rank'
+    get '/mentors/rank',      to: 'mentors#rank'
+    
     resources :users,         only: [:update, :show]
     get   '/profile/edit',    to: 'profiles#edit', as: :edit_profile
     get   '/profile',    to: 'profiles#show', as: :profile

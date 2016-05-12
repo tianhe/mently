@@ -31,7 +31,10 @@ class User < ActiveRecord::Base
   scope :inactive, -> { where(matches: {status: Match.statuses[:inactive]}) }
   scope :dating, -> { where(matches: {status: Match.statuses[:dating]}) }
   scope :dated, -> { where(matches: {status: Match.statuses[:dated]}) }
-
+  scope :waiting_to_confirm, -> { where(matches: {status: Match.statuses[:waiting_to_confirm]}) }
+  scope :order_by_mentor_rank, -> { order("matches.mentor_rank") }
+  scope :order_by_mentee_rank, -> { order("matches.mentee_rank") }
+  
   def update_availability
     update_mentor_availability
     update_mentee_availability
@@ -54,7 +57,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{profile.first_name} #{profile.last_name}"
+    "#{profile.first_name} #{profile.last_name}".titleize
   end
 
 private

@@ -1,0 +1,16 @@
+.row
+  .col-xs-1
+  .col-xs-10
+    .row
+      %h3
+        Rank Mentors
+    .row    
+      - if @mentor_candidate_matches
+        = form_tag '/matches/update_multiple', method: :patch do 
+          - @mentor_candidate_matches.each do |match|
+            = fields_for "matches[]", match do |f|
+              .form-group
+                = f.label :mentor_rank, match.mentor.full_name
+                = f.select :mentor_rank, options_for_select((1..@mentor_candidate_matches.count).to_a.prepend(['']), match.mentor_rank)
+
+          = submit_tag 'Submit'

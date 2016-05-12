@@ -11,10 +11,10 @@
       %h3
         Active Mentor Candidates
     .row
-      = render '/web/mentors/mentors', mentors: @mentor_candidates
+      = render '/web/mentors/mentor_matches', mentor_matches: @mentor_dating_match
     .row
       .col-xs-10
       .col-xs-2
-        = button_to 'Rank Candidates', '/mentors/rank'          
+        = button_to 'Rank Candidates', '/mentors/rank', method: :get
           
 

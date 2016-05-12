@@ -8,17 +8,17 @@ class Admin::MatchesController < Admin::ApplicationController
   end
   
   def index
-    user = User.find_by(id: params[:user_id])
+    @user = User.find_by(id: params[:user_id])
 
-    @mentor_candidates = user.mentors.dating
-    @mentee_candidates = user.mentees.dating
-    @past_mentor_candidates = user.mentors.dated
-    @past_mentee_candidates = user.mentees.dated
+    @mentor_candidates = @user.mentors.dating
+    @mentee_candidates = @user.mentees.dating
+    @past_mentor_candidates = @user.mentors.dated
+    @past_mentee_candidates = @user.mentees.dated
 
-    @active_mentors = user.mentors.active
-    @active_mentees = user.mentees.active
-    @past_mentors = user.mentors.inactive
-    @past_mentees = user.mentees.inactive
+    @active_mentors = @user.mentors.active
+    @active_mentees = @user.mentees.active
+    @past_mentors = @user.mentors.inactive
+    @past_mentees = @user.mentees.inactive
   end
 
   def create

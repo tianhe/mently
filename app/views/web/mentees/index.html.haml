@@ -11,9 +11,9 @@
       %h3
         Active Mentee Candidates
     .row
-      = render '/web/mentees/mentees', mentees: @mentor_candidates
+      = render '/web/mentees/mentees', mentees: @mentee_candidates
     .row
       .col-xs-10
       .col-xs-2
-        = button_to 'Rank Candidates', '/mentees/rank'          
+        = button_to 'Rank Candidates', '/mentees/rank', method: :get
           

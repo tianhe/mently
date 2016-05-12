@@ -1,0 +1,26 @@
+%table.table-striped
+  %tr
+    %th
+      First Name
+    %th
+      Last Name
+    %th
+      Department
+    %th
+      Location
+    %th
+      Rank
+
+  - if mentor_matches
+    - mentor_matches.each do |mm|
+      %tr
+        %td
+          = mm.mentor.profile.first_name
+        %td
+          = mm.mentor.profile.last_name
+        %td
+          = mm.mentor.profile.department
+        %td
+          = mm.mentor.profile.location
+        %td
+          = mm.mentor_rank

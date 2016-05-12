@@ -5,6 +5,14 @@
     = f.label :email
     %br/
     = f.email_field :email, autofocus: true, class: 'form-control'
+  .form-group
+    = f.label :first_name
+    %br/
+    = text_field_tag 'user[first_name]', :first_name
+  .form-group
+    = f.label :last_name
+    %br/
+    = text_field_tag 'user[last_name]', :last_name
   - Role.defined_roles.each do |role|
     = f.label(role) do
       = check_box_tag 'user[_roles][]', role, resource.has_role?(role)

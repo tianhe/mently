@@ -5,10 +5,11 @@ class MentorProfile < ActiveRecord::Base
 
   def update_availability
     if self.capacity > 0
-      self.is_available = self.capacity > user.mentees.where("matches.start_date <= ? and matches.end_date >= ?", Date.today, Date.today).count
+      self.is_available = self.capacity > user.mentees.active.count
     else
       self.is_available = false
     end
     true
   end
+
 end

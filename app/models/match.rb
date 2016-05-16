@@ -12,9 +12,16 @@ class Match < ActiveRecord::Base
   end
 
   def self.greedy_match
-    dating_mentees = Match.dating.map(&:mentees).uniq
+    dating_mentees = Match.dating.map(&:mentee).uniq
+    
     dating_mentees.each do |mentee|
-      mentee.mentors.dating
+      mentor_match = mentee.mentor_matches.dating.find do |mentor_match|
+        mentor_match.mentor.is_available_as_mentor?
+      end
+
+      if mentor_match
+        mentee.match_with_mentor(mentor_match.mentor)
+      end
     end
   end
 end

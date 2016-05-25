@@ -5,3 +5,11 @@
     = token_tag form_authenticity_token
     = file_field_tag 'file'
     = submit_tag 'Import Mentors'
+
+%h2
+  Import Mentees
+%div{style: 'padding:25px'}
+  %form{action: admin_upload_mentees_path, method: 'post', enctype: 'multipart/form-data'}
+    = token_tag form_authenticity_token
+    = file_field_tag 'file'
+    = submit_tag 'Import Mentees'

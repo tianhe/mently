@@ -60,6 +60,12 @@ class User < ActiveRecord::Base
     "#{profile.first_name} #{profile.last_name}".titleize
   end
 
+  def self.find_by_full_name full_name
+    first_name = full_name.split(' ')[0]
+    last_name = full_name.split(' ')[1..-1].join(' ')
+    profile.where(first_name: first_name, last_name: last_name).first.user
+  end
+
   def match_with_mentor mentor
     self.mentor_matches.dating.find_by(mentor: mentor).update(status: :waiting_to_confirm)
     self.mentor_matches.dating.where.not(mentor: mentor).update_all(status: 1)    

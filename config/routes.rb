@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get  '/mentees', to: 'mentees#index', as: :mentees
     get  '/uploads',  to: 'uploads#index', as: :uploads
     post '/uploads/mentors', to: 'uploads#mentors', as: :upload_mentors
+    post '/uploads/mentees', to: 'uploads#mentees', as: :upload_mentees
 
     resources :users do
       resources :matches, only: [:create, :update, :index, :edit, :new]

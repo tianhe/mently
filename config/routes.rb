@@ -2,38 +2,6 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
-  namespace :web do
-  get 'matches/update'
-  end
-
-  namespace :web do
-  get 'mentees/index'
-  end
-
-  namespace :web do
-  get 'mentors/index'
-  end
-
-  namespace :web do
-  get 'mentors_controller/index'
-  end
-
-  namespace :admin do
-  get 'matches/create'
-  end
-
-  namespace :admin do
-  get 'matches/update'
-  end
-
-  namespace :admin do
-  get 'matches/edit'
-  end
-
-  namespace :admin do
-  get 'matches/index'
-  end
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -47,6 +15,9 @@ Rails.application.routes.draw do
   namespace :admin do
     get  '/mentors', to: 'mentors#index', as: :mentors
     get  '/mentees', to: 'mentees#index', as: :mentees
+    get  '/uploads',  to: 'uploads#index', as: :uploads
+    post '/uploads/mentors', to: 'uploads#mentors', as: :upload_mentors
+
     resources :users do
       resources :matches, only: [:create, :update, :index, :edit, :new]
     end

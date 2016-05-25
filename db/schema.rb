@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423235743) do
+ActiveRecord::Schema.define(version: 20160525030703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,9 +69,6 @@ ActiveRecord::Schema.define(version: 20160423235743) do
     t.integer  "mentee_rank"
   end
 
-  add_index "matches", ["mentee_id"], name: "index_matches_on_mentee_id", using: :btree
-  add_index "matches", ["mentor_id"], name: "index_matches_on_mentor_id", using: :btree
-
   create_table "mentee_profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "capacity"
@@ -90,15 +87,6 @@ ActiveRecord::Schema.define(version: 20160423235743) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "preferences", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "description"
-    t.string   "role"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "capacity"
-  end
-
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "first_name"
@@ -111,6 +99,7 @@ ActiveRecord::Schema.define(version: 20160423235743) do
     t.string   "location"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "title"
   end
 
   create_table "roles", force: :cascade do |t|

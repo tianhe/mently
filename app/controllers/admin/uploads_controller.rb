@@ -4,6 +4,46 @@ class Admin::UploadsController < Admin::ApplicationController
   def index
   end
 
+  def mentees
+    data = params[:file].read
+
+    CSV.parse(data, headers: true, col_sep: "\t", skip_blanks: true) do |row|
+      if row[1].present?
+        first_name = row[1].split(' ')[0]
+        last_name = row[1].split(' ')[1..-1].first
+        department = row[2]
+        experience = row[3]
+        looking_for = row[4]
+        bio = row[5]
+        email = row[6]
+        location = row[7] || row[9]
+
+        user = User.find_or_create_by(email: row[1]) do |user|
+          user.password = 'xogroup2016'
+          user.password_confirmation = 'xogroup2016'        
+        end
+
+        user.profile.update first_name: first_name, last_name: last_name, 
+          department: department, location: location, experience: experience
+          
+        user.add_role 'mentee'
+
+        #add mentors - mentee matches
+        #row[11-13]
+        #match preference
+        #row[15-17]
+        #matched mentor
+        #row[18]
+        #matched date
+        #row[20]
+        
+      end      
+    end
+
+    flash[:notice] = 'Upload successful'
+    redirect_to admin_uploads_path
+  end
+
   def mentors
     data = params[:file].read
 

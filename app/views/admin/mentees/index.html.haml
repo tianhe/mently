@@ -8,7 +8,7 @@
       .col-xs-5
         = form_tag '/admin/mentees', method: 'get' do
           = label_tag :by_department, "Department"
-          = select_tag :by_department, options_for_select(['', 'Tech', 'Product'], params[:by_department])
+          = select_tag :by_department, options_for_select(@departments, params[:by_department])
           = label_tag :is_available_as_mentee, "Available"
           = select_tag :is_available_as_mentee, options_for_select(['true', 'false'], params[:is_available_as_mentee])    
           = submit_tag("Filter", class: 'filter-button')

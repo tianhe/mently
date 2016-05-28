@@ -5,6 +5,7 @@ class Admin::MentorsController < Admin::ApplicationController
   
   def index
     @mentors = apply_scopes(User).with_role(:mentor)
+    @departments = [''] + Profile.pluck(:department).uniq.compact
   end
 
   def upload

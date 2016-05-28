@@ -69,6 +69,9 @@ ActiveRecord::Schema.define(version: 20160525030703) do
     t.integer  "mentee_rank"
   end
 
+  add_index "matches", ["mentee_id"], name: "index_matches_on_mentee_id", using: :btree
+  add_index "matches", ["mentor_id"], name: "index_matches_on_mentor_id", using: :btree
+
   create_table "mentee_profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "capacity"
@@ -85,6 +88,15 @@ ActiveRecord::Schema.define(version: 20160525030703) do
     t.text     "mentee_criteria"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "preferences", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "description"
+    t.string   "role"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "capacity"
   end
 
   create_table "profiles", force: :cascade do |t|

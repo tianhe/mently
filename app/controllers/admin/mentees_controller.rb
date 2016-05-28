@@ -5,5 +5,6 @@ class Admin::MenteesController < Admin::ApplicationController
 
   def index
     @mentees = apply_scopes(User).with_role(:mentee)
+    @departments = [''] + Profile.pluck(:department).uniq.compact
   end
 end

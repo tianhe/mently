@@ -61,9 +61,12 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_full_name full_name
+    return nil unless full_name.present?
+    
     first_name = full_name.split(' ')[0]
     last_name = full_name.split(' ')[1..-1].join(' ')
-    profile.where(first_name: first_name, last_name: last_name).first.user
+    
+    Profile.where(first_name: first_name, last_name: last_name).first.try(:user)
   end
 
   def match_with_mentor mentor

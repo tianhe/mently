@@ -9,13 +9,15 @@
     %th
       Location
     %th
-      Potential Mentee Count
+      Potential Mentees
     %th
-      Active Mentee Count
+      Existing Mentees
     %th
       Capacity
     %th
-      Available for Matching
+      Available
+    %th
+      Matches
 
   - mentors.each do |m|
     %tr
@@ -34,4 +36,7 @@
       %td
         = m.mentor_profile.capacity
       %td
-        = m.mentor_profile.is_available
+        = m.mentor_profile.is_available ? 'Yes' : 'No'
+      %td
+        = link_to 'Matches', "/admin/users/#{m.id}/matches"
+

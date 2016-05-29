@@ -2,7 +2,8 @@
   .col-xs-1
   .col-xs-10
     .row
-      %h1 Matches
+      %h1 
+        = "#{@user.full_name}"
 
 .row
   .col-xs-1
@@ -12,38 +13,55 @@
 .row
   .col-xs-1
   .col-xs-10
-    .row
-      %h3
-        Active Mentors
-    .row
-      = render '/admin/mentors/mentors', mentors: @active_mentors
+    - if @user.has_role?(:mentee)
+      .row
+        %h2
+          Mentors
 
-    .row
-      %h3
-        Active Mentor Candidates
-    .row
-      = render '/admin/mentors/mentors', mentors: @mentor_candidates
+      - if @active_mentors.present?
+        .row
+          %h3
+            Current
+        .row
+          = render '/admin/mentors/mentors', mentors: @active_mentors
 
-    .row
-      %h3
-        Active Mentees
-    .row
-      = render '/admin/mentees/mentees', mentees: @active_mentees
-            
-    .row
-      %h3
-        Active Mentee Candidates
-    .row
-      = render '/admin/mentees/mentees', mentees: @mentee_candidates
+      - if @mentor_candidates.present?
+        .row
+          %h3
+            Candidates
+        .row
+          = render '/admin/mentors/mentors', mentors: @mentor_candidates
 
-    .row
-      %h3
-        Past Mentors
-    .row
-      = render '/admin/mentors/mentors', mentors: @past_mentors
+      - if @past_mentors.present?
+        .row
+          %h3
+            Past
+        .row
+          = render '/admin/mentors/mentors', mentors: @past_mentors
 
-    .row
-      %h3
-        Past Mentor Candidates
-    .row
-      = render '/admin/mentors/mentors', mentors: @past_mentor_candidates
+      - if @past_mentors_candidates.present?
+        .row
+          %h3
+            Past Candidates
+        .row
+          = render '/admin/mentors/mentors', mentors: @past_mentor_candidates
+
+    - if @user.has_role?(:mentor)
+      .row
+        %h2
+          Mentees
+
+      - if @active_mentees.present?
+        .row
+          %h3
+            Current Mentees
+        .row
+          = render '/admin/mentees/mentees', mentees: @active_mentees
+              
+      - if @mentee_candidates.present?
+        .row
+          %h3
+            Current Mentee Candidates
+        .row
+          = render '/admin/mentees/mentees', mentees: @mentee_candidates
+

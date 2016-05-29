@@ -9,9 +9,9 @@
     %th
       Location
     %th
-      Available for Matching
+      Available
     %th
-      Assign Mentors
+      Matches
 
   - mentees.each do |m|
     %tr
@@ -24,6 +24,6 @@
       %td
         = m.profile.location
       %td
-        = m.mentee_profile.is_available
+        = m.mentee_profile.is_available ? 'Yes' : 'No'
       %td
         = link_to 'Matches', "/admin/users/#{m.id}/matches"
